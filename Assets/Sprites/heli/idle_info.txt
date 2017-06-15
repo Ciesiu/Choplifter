@@ -1,0 +1,3 @@
+idle_left 86px x 12
+idle_right 86px x 12
+idle_middle 86px x 3
