@@ -10,6 +10,11 @@ public class Controls : MonoBehaviour {
     public bool moveright;
     public bool moveup;
     public bool movedown;
+    public int direction = 1;
+    public int shootingDirection = 2;
+    //1 - left-top; 2 - left-flat; 3 - left-bottom; 
+    //4 - front-left; 5 - front-middle; 6 - front-right; 
+    //7 - right-top; 8 - right-flat; 9 - right-bottom
 
     // Use this for initialization
     void Start () {
