@@ -12,9 +12,19 @@ public class Controls : MonoBehaviour {
     public bool movedown;
     public int direction = 1;
     public int shootingDirection = 2;
+    public bool flyingDisabled = false;
     //1 - left-top; 2 - left-flat; 3 - left-bottom; 
     //4 - front-left; 5 - front-middle; 6 - front-right; 
     //7 - right-top; 8 - right-flat; 9 - right-bottom
+
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.name == "upperGround")
+        {
+            flyingDisabled = true;
+        }
+    }
 
     // Use this for initialization
     void Start () {
@@ -34,6 +44,7 @@ public class Controls : MonoBehaviour {
         }
         if (moveup)
         {
+            flyingDisabled = false;
             rb.velocity = new Vector2(rb.velocity.x, movespeed);
         }
         if (movedown)

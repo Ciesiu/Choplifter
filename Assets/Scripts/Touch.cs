@@ -17,36 +17,46 @@ public class Touch : MonoBehaviour {
 
     public void ShootButton()
     {
-        if (cooldownTimer <= 0)
+        if (player.flyingDisabled == false)
         {
-            Debug.Log("pew");
-            cooldownTimer = fireDelay;
-            Quaternion zero = new Quaternion();
-            zero.eulerAngles = new Vector3(0, 0, 0);
-            Debug.Log(player.transform.position);
+            if (cooldownTimer <= 0)
+            {
+                Debug.Log("pew");
+                cooldownTimer = fireDelay;
+                Quaternion zero = new Quaternion();
+                zero.eulerAngles = new Vector3(0, 0, 0);
+                Debug.Log(player.transform.position);
 
-            Transform bullet = Instantiate(heliBulletPrefab, player.transform.position, zero) as Transform;
-            Physics2D.IgnoreLayerCollision(8, 9);
-            //Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
-        }   
+                Transform bullet = Instantiate(heliBulletPrefab, player.transform.position, zero) as Transform;
+                Physics2D.IgnoreLayerCollision(8, 9);
+                Physics2D.IgnoreLayerCollision(11, 9);
+                //Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
+            }
+        }
     }
     public void LeftArrow()
     {
-        player.moveright = false;
-        player.moveleft = true;
-        player.animator.SetInteger("HorizontalMovement", 1);
-        player.animator.SetFloat("Acceleration", 1);
-        player.animator.SetBool("Mirror", false);
-        setShootingDirection();
+        if (player.flyingDisabled == false)
+        {
+            player.moveright = false;
+            player.moveleft = true;
+            player.animator.SetInteger("HorizontalMovement", 1);
+            player.animator.SetFloat("Acceleration", 1);
+            player.animator.SetBool("Mirror", false);
+            setShootingDirection();
+        }
     }
     public void RightArrow()
     {
-        player.moveright = true;
-        player.moveleft = false;
-        player.animator.SetInteger("HorizontalMovement", 2);
-        player.animator.SetFloat("Acceleration", 1);
-        player.animator.SetBool("Mirror", false);
-        setShootingDirection();
+        if (player.flyingDisabled == false)
+        {
+            player.moveright = true;
+            player.moveleft = false;
+            player.animator.SetInteger("HorizontalMovement", 2);
+            player.animator.SetFloat("Acceleration", 1);
+            player.animator.SetBool("Mirror", false);
+            setShootingDirection();
+        }
     }
     public void TopArrow()
     {
@@ -56,9 +66,12 @@ public class Touch : MonoBehaviour {
     }
     public void BottomArrow()
     {
-        player.movedown = true;
-        player.moveup = false;
-        setShootingDirection();
+        if (player.flyingDisabled == false)
+        {
+            player.movedown = true;
+            player.moveup = false;
+            setShootingDirection();
+        }
     }
     public void ReleaseLeftArrow()
     {
@@ -89,19 +102,25 @@ public class Touch : MonoBehaviour {
     public void SwitchDirectionLeft()
         //lewo - 1, środek - 2, prawo - 3
     {
-        player.direction = player.animator.GetInteger("Direction");
-        player.direction--;
-        if (player.direction < 1) player.direction = 3;
-        player.animator.SetInteger("Direction", player.direction);
-        setShootingDirection();
+        if (player.flyingDisabled == false)
+        {
+            player.direction = player.animator.GetInteger("Direction");
+            player.direction--;
+            if (player.direction < 1) player.direction = 3;
+            player.animator.SetInteger("Direction", player.direction);
+            setShootingDirection();
+        }
     }
     public void SwitchDirectionRight()
     {
-        player.direction = player.animator.GetInteger("Direction");
-        player.direction++;
-        if (player.direction > 3) player.direction = 1;
-        player.animator.SetInteger("Direction", player.direction);
-        setShootingDirection();
+        if (player.flyingDisabled == false)
+        {
+            player.direction = player.animator.GetInteger("Direction");
+            player.direction++;
+            if (player.direction > 3) player.direction = 1;
+            player.animator.SetInteger("Direction", player.direction);
+            setShootingDirection();
+        }
     }
     
     void setShootingDirection()
