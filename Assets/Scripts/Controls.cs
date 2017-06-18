@@ -19,6 +19,13 @@ public class Controls : MonoBehaviour {
     //4 - front-left; 5 - front-middle; 6 - front-right; 
     //7 - right-top; 8 - right-flat; 9 - right-bottom
 
+    //AktywneObiekty
+    public int activeTanks;
+    public int jetTimer;
+    public int activeSurvs;   
+    
+
+    
 
     void OnCollisionEnter2D(Collision2D coll)
     {

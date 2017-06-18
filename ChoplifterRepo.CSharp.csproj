@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Controls.cs" />
     <Compile Include="Assets\Scripts\ExplosionEnd.cs" />
+    <Compile Include="Assets\Scripts\FontPixelate.cs" />
     <Compile Include="Assets\Scripts\HeliBulletMove.cs" />
     <Compile Include="Assets\Scripts\HouseDestruction.cs" />
     <Compile Include="Assets\Scripts\JetMovement.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Assets\Scripts\StarScript.cs" />
     <Compile Include="Assets\Scripts\TankDestruction.cs" />
     <Compile Include="Assets\Scripts\Touch.cs" />
+    <Compile Include="Assets\Scripts\gameHolder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Sprites\heli\idle_info.txt" />
