@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\ExplosionEnd.cs" />
     <Compile Include="Assets\Scripts\HeliBulletMove.cs" />
     <Compile Include="Assets\Scripts\HouseDestruction.cs" />
+    <Compile Include="Assets\Scripts\JetMovement.cs" />
     <Compile Include="Assets\Scripts\SelfDestruct.cs" />
     <Compile Include="Assets\Scripts\TankDestruction.cs" />
     <Compile Include="Assets\Scripts\Touch.cs" />
