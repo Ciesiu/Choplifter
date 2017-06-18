@@ -8,8 +8,7 @@
 TODO
 * zaanimować jebańców
 * zaanimować czołgi
-* zaanimować dżety
-* generowanie domków
+* zaanimować strzaly do jetuw
 * logika za czołgami
 * logika za jebańcami
 * logika za samolotami
@@ -20,4 +19,3 @@ TODO
 
 * czy jest tu jakieś hp?
 * co to za liczby u góry ekranu?
-* przesuwać tło, czy tylko śmieci na nim?
