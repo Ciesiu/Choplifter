@@ -12,6 +12,7 @@ public class JetMovement : MonoBehaviour {
     public Collider2D prawy;
     public Collider2D srodkowy;
     public Controls player;
+    public GameObject missile;
 
     // Use this for initialization
     void Start () {
@@ -24,7 +25,7 @@ public class JetMovement : MonoBehaviour {
         prawy = GetComponent<Collider2D>();
         player = FindObjectOfType<Controls>();
         srodkowy = GetComponent<Collider2D>();
-        this.transform.position = new Vector3(lewy.transform.position.x - 5, player.transform.position.y, 0);
+        this.transform.position = new Vector3(lewy.transform.position.x - 5, player.transform.position.y+0.25f, 0);
     }
 	
 	// Update is called once per frame
@@ -69,6 +70,15 @@ public class JetMovement : MonoBehaviour {
             {
                 wPrawo = false;
                 //szczau
+                Quaternion zero = new Quaternion();
+                zero.eulerAngles = new Vector3(0, 0, 0);
+                Vector3 pos1 = new Vector3(transform.position.x-1,transform.position.y-0.18f,transform.position.z);
+                Vector3 pos2 = new Vector3(transform.position.x - 1, transform.position.y - 0.6f, transform.position.z);
+                Transform jetMissile = Instantiate(missile, pos1, zero) as Transform;
+                Transform jetMissile2 = Instantiate(missile, pos2, zero) as Transform;
+                Physics2D.IgnoreLayerCollision(18, 19);
+
+                //////////
             }
             if (coll.tag == "LeftCollider")
             {
