@@ -7,6 +7,7 @@ public class BurgingHouseDropThePeople : MonoBehaviour {
     private Controls player;
     public GameObject surv;
     System.Random rnd;
+    float survRespCooldown = 0.3f;
 
     // Use this for initialization
     void Start () {
@@ -17,17 +18,22 @@ public class BurgingHouseDropThePeople : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if(player.activeSurvs<8)
-            if (survs > 0)
+        if (player.activeSurvs < 8)
+            if (survs > 0 && survRespCooldown <= 0)
             {
                 player.activeSurvs++;
                 //zresp surva
-                float addX = (rnd.Next(0, 101))/100;
-                Vector3 newPos = new Vector3(transform.position.x - 0.5f + addX, transform.position.y, transform.position.z);
+                /*float addX = (rnd.Next(0, 101))/100;
+                Debug.Log(addX);
+                Vector3 newPos = new Vector3(transform.position.x - 0.5f + addX, transform.position.y, transform.position.z)*/
+                
+                
                 Quaternion zero = new Quaternion();
                 zero.eulerAngles = new Vector3(0, 0, 0);
-                Transform burningHouse = Instantiate(surv, newPos, zero) as Transform;
+                Transform burningHouse = Instantiate(surv, transform.position, zero) as Transform;
                 survs--;
+                survRespCooldown = 0.3f;
             }
+        survRespCooldown -= Time.deltaTime;
 	}
 }
