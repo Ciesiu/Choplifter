@@ -63,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BaseRunner.cs" />
+    <Compile Include="Assets\Scripts\BurgingHouseDropThePeople.cs" />
     <Compile Include="Assets\Scripts\Controls.cs" />
     <Compile Include="Assets\Scripts\ExplosionEnd.cs" />
     <Compile Include="Assets\Scripts\FontPixelate.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="Assets\Scripts\HouseDestruction.cs" />
     <Compile Include="Assets\Scripts\JetMovement.cs" />
     <Compile Include="Assets\Scripts\MissleBehavior.cs" />
+    <Compile Include="Assets\Scripts\NormalSurv.cs" />
     <Compile Include="Assets\Scripts\SelfDestruct.cs" />
     <Compile Include="Assets\Scripts\StarScript.cs" />
     <Compile Include="Assets\Scripts\TankDestruction.cs" />
