@@ -6,6 +6,7 @@ public class gameHolder : MonoBehaviour {
     public static int SURV_SAVED;
     public static int SURV_DIED;
     public static int SURV_ONBOARD;
+    public static int ROUND_NUMBER;
 
     public static void SurvOnBoard()
     {
@@ -24,15 +25,22 @@ public class gameHolder : MonoBehaviour {
 
 	// Use this for initialization
 	public static void GameOver() {
-        SURV_DIED = 0;
-        SURV_SAVED = 0;
         SURV_ONBOARD = 0;
 
+    }
 
+    public static void NewGame()
+    {
+        SURV_DIED = 0;
+        SURV_ONBOARD = 0;
+        SURV_SAVED = 0;
+        ROUND_NUMBER = 1;
     }
 
     public static void HeliCrashed()
     {
+        ROUND_NUMBER += 1;
+        if (ROUND_NUMBER >= 4) GameOver();
         SURV_DIED += SURV_ONBOARD;
         SURV_ONBOARD = 0;
     }
