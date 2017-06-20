@@ -23,10 +23,6 @@ public class BurgingHouseDropThePeople : MonoBehaviour {
             {
                 player.activeSurvs++;
                 //zresp surva
-                /*float addX = (rnd.Next(0, 101))/100;
-                Debug.Log(addX);
-                Vector3 newPos = new Vector3(transform.position.x - 0.5f + addX, transform.position.y, transform.position.z)*/
-                
                 
                 Quaternion zero = new Quaternion();
                 zero.eulerAngles = new Vector3(0, 0, 0);

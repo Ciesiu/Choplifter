@@ -19,8 +19,9 @@ public class Controls : MonoBehaviour {
     //4 - front-left; 5 - front-middle; 6 - front-right; 
     //7 - right-top; 8 - right-flat; 9 - right-bottom
 
+    private Vector3 startingPosition = new Vector3(1.780549f, -2.041963f,0);
 
-
+    public float survUnloadTimer = 0;
 
     public GameObject tank;
     public GameObject jet;
@@ -29,6 +30,7 @@ public class Controls : MonoBehaviour {
     //AktywneObiekty
     public float jetTimer;
     public int activeSurvs = 0;
+
     
   
     void OnTriggerStay2D(Collider2D other)
@@ -37,13 +39,18 @@ public class Controls : MonoBehaviour {
         {
             if (flyingDisabled && gameHolder.SURV_ONBOARD>0)
             {
-                Quaternion zero = new Quaternion();
-                zero.eulerAngles = new Vector3(0, 0, 0);
-                Transform burningHouse = Instantiate(survToBase, transform.position, zero) as Transform;
-                gameHolder.SURV_ONBOARD--;
-                //wypuść typka
+                if (survUnloadTimer <= 0)
+                {   //wypuść typka
+                    Quaternion zero = new Quaternion();
+                    zero.eulerAngles = new Vector3(0, 0, 0);
+                    Transform burningHouse = Instantiate(survToBase, transform.position, zero) as Transform;
+                    gameHolder.SURV_ONBOARD--;
+                    survUnloadTimer = 0.3f;
+                    activeSurvs--;
+                }
             }
         }
+        survUnloadTimer -= Time.deltaTime;
     }
     
 
@@ -52,6 +59,19 @@ public class Controls : MonoBehaviour {
         if (coll.gameObject.name == "upperGround")
         {
             flyingDisabled = true;
+        }
+        if(coll.gameObject.tag == "jetMissile")
+        {
+            transform.position = startingPosition;
+            //animacja śmierci
+            gameHolder.HeliCrashed();
+            animator.SetInteger("Direction", 3);
+            //ded
+        }
+        if(coll.gameObject.tag == "tankBullet" && flyingDisabled)
+        {
+
+            //also ded
         }
     }
 
@@ -62,16 +82,14 @@ public class Controls : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         animator = this.GetComponent<Animator>();
 
-        //tanki są zawsze 2, jak któryś ginie to respi kolejnego
-        //więc respimy 2 tanki
+        //tank jest zawsze 1, jak ginie to respi kolejnego
+        //jak oddalimy sie za bardzo to sie derespi i respi bliżej
         Quaternion zero = new Quaternion();
         zero.eulerAngles = new Vector3(0, 0, 0);
         Vector3 tank1pos = new Vector3(-57, -2.474545f,0);
-        Vector3 tank2pos = new Vector3(-87, -2.474545f, 0);
 
-        Transform tank1 = Instantiate(tank, tank1pos, zero) as Transform;
-        Transform tank2 = Instantiate(tank, tank2pos, zero) as Transform;
-        //koniec respienia tanków
+        Transform tank0 = Instantiate(tank, tank1pos, zero) as Transform;
+        //koniec respienia tanka
     }
 	
 	// Update is called once per frame

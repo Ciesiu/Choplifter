@@ -13,13 +13,14 @@ public class JetMovement : MonoBehaviour {
     public Collider2D srodkowy;
     public Controls player;
     public GameObject missile;
+    private bool attacked = false;
 
     // Use this for initialization
     void Start () {
         flaga = 1;
         wPrawo = true;
         pierwszyRaz = true;
-        ruchPerTick = new Vector3(0.2F, 0, 0);
+        ruchPerTick = new Vector3(0.4F, 0, 0);
         animator = GetComponent<Animator>();
         lewy = GetComponent<Collider2D>();
         prawy = GetComponent<Collider2D>();
@@ -61,22 +62,28 @@ public class JetMovement : MonoBehaviour {
                 animator.SetInteger("STATE", 3);
                 wPrawo = false;
                 pierwszyRaz = false;
+                //ruchPerTick = new Vector3(0.4F, 0, 0); //opcja na zmienną prędkość ruchu
             }
 
         }
         else
         {
+            
             if (coll.tag == "MidCollider")
             {
                 wPrawo = false;
                 //szczau
-                Quaternion zero = new Quaternion();
-                zero.eulerAngles = new Vector3(0, 0, 0);
-                Vector3 pos1 = new Vector3(transform.position.x-1,transform.position.y-0.18f,transform.position.z);
-                Vector3 pos2 = new Vector3(transform.position.x - 1, transform.position.y - 0.6f, transform.position.z);
-                Transform jetMissile = Instantiate(missile, pos1, zero) as Transform;
-                Transform jetMissile2 = Instantiate(missile, pos2, zero) as Transform;
-                Physics2D.IgnoreLayerCollision(18, 19);
+                if (!attacked)
+                {
+                    Quaternion zero = new Quaternion();
+                    zero.eulerAngles = new Vector3(0, 0, 0);
+                    Vector3 pos1 = new Vector3(transform.position.x - 1, transform.position.y - 0.18f, transform.position.z);
+                    Vector3 pos2 = new Vector3(transform.position.x - 1, transform.position.y - 0.6f, transform.position.z);
+                    Transform jetMissile = Instantiate(missile, pos1, zero) as Transform;
+                    Transform jetMissile2 = Instantiate(missile, pos2, zero) as Transform;
+                    Physics2D.IgnoreLayerCollision(18, 19);
+                    attacked = true;
+                }
 
                 //////////
             }
