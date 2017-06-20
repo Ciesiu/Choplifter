@@ -21,6 +21,7 @@ public class Touch : MonoBehaviour {
         {
             if (cooldownTimer <= 0)
             {
+                
                 Debug.Log("pew");
                 cooldownTimer = fireDelay;
                 Quaternion zero = new Quaternion();

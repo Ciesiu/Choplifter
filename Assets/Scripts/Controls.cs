@@ -21,6 +21,9 @@ public class Controls : MonoBehaviour {
     public bool decelerate = false;
     public bool isDead = false;
     private System.Random rnd = new System.Random();
+
+
+
     //1 - left-top; 2 - left-flat; 3 - left-bottom; 
     //4 - front-left; 5 - front-middle; 6 - front-right; 
     //7 - right-top; 8 - right-flat; 9 - right-bottom
@@ -41,6 +44,10 @@ public class Controls : MonoBehaviour {
     public GameObject mountaint1;
     public GameObject mountaint2;
     public GameObject mountaint3;
+
+    public AudioSource audio;
+
+
 
     //AktywneObiekty
     public float jetTimer;
@@ -63,6 +70,11 @@ public class Controls : MonoBehaviour {
                     gameHolder.SURV_ONBOARD--;
                     survUnloadTimer = 0.3f;
                     activeSurvs--;
+                    if (gameHolder.SURV_DIED + gameHolder.SURV_SAVED >= 64)
+                    {
+                        gameHolder.ROUND_NUMBER = 5;
+                        UITextBehavior.ResetTime();
+                    }
                 }
             }
         }
@@ -78,20 +90,22 @@ public class Controls : MonoBehaviour {
         }
         if(coll.gameObject.tag == "jetMissile")
         {
-            if (!isDead) { toHeliResp = 120; isDead = true; }
+            if (!isDead) { if (gameHolder.ROUND_NUMBER == 3) { gameHolder.ROUND_NUMBER = 4; UITextBehavior.ResetTime(); } toHeliResp = 120; isDead = true; }
 
             //ded
         }
         if(coll.gameObject.tag == "tankBullet" && flyingDisabled)
         {
 
-            if (!isDead) { toHeliResp = 120; isDead = true; }
+            if (!isDead) {if (gameHolder.ROUND_NUMBER == 3) { gameHolder.ROUND_NUMBER = 4; UITextBehavior.ResetTime(); } toHeliResp = 120; isDead = true; }
             //also ded
         }
     }
 
     // Use this for initialization
     void Start () {
+
+
         fence1 = GameObject.Find("env_fence");
         fence2 = GameObject.Find("env_fence (1)");
         fence3 = GameObject.Find("env_fence (2)");
@@ -100,6 +114,8 @@ public class Controls : MonoBehaviour {
         mountaint1 = GameObject.Find("env_mountain");
         mountaint2 = GameObject.Find("env_mountain (1)");
         mountaint3 = GameObject.Find("env_mountain (2)");
+
+        audio = this.GetComponent<AudioSource>();
 
         cam = Camera.main;
         rb = GetComponent<Rigidbody2D>();
@@ -119,7 +135,17 @@ public class Controls : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        if (isDead) audio.volume = 0.0F;
+        else if (flyingDisabled)
+        {
+            audio.volume = 0.6F;
+        }
+        else
+        {
+            audio.volume = 1F;
+        }
+
+
         if (moveright)
         {
             rb.velocity = new Vector2(movespeed, rb.velocity.y);
@@ -227,13 +253,21 @@ public class Controls : MonoBehaviour {
         {
             transform.position = startingPosition;
             flyingDisabled = true;
-            
-            gameHolder.HeliCrashed();
-            UITextBehavior.ResetTime();
+
+
+            if (gameHolder.ROUND_NUMBER < 4)
+            {
+                gameHolder.HeliCrashed();
+                UITextBehavior.ResetTime();
+            }
+            else
+            {
+                Application.LoadLevel(0);
+            }
             animator.SetInteger("Direction", 3);
             isDead = false;
             toHeliResp = -1;
-
+            
         }
 
         //update płotu

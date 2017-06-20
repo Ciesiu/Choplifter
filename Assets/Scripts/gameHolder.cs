@@ -40,7 +40,6 @@ public class gameHolder : MonoBehaviour {
     public static void HeliCrashed()
     {
         ROUND_NUMBER += 1;
-        if (ROUND_NUMBER >= 4) GameOver();
         SURV_DIED += SURV_ONBOARD;
         SURV_ONBOARD = 0;
     }
