@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Controls : MonoBehaviour {
 
+    //-99.5 lewy koniec
+    //-20 prawy koniec (safeZone/baza za płotkiem)
+
     public Camera cam;
     public Rigidbody2D rb;
     public Animator animator;
@@ -153,7 +156,6 @@ public class Controls : MonoBehaviour {
         }
 
         Vector3 camPos = cam.transform.position;
-        //Debug.Log(camPos);
         cam.transform.position = new Vector3(camPos.x, 0, camPos.z);
 
         //respienie przeciwników
@@ -161,7 +163,7 @@ public class Controls : MonoBehaviour {
         jetTimer -= Time.deltaTime;
         if(gameHolder.SURV_SAVED > 8)
         {
-            if (jetTimer <= 0)
+            if (jetTimer <= 0 && transform.position.x < 20) //jeśli czas na jeta + gracz jest poza safeZonem
             {
                 //resp atak dżeta
                 Quaternion zero = new Quaternion();

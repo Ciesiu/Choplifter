@@ -39,7 +39,7 @@ public class TankDestruction : MonoBehaviour {
         }
 
         if (activityTimer <= 0) lockedInActivity = false;
-        if (System.Math.Abs(player.transform.position.x - transform.position.x) < 13) //jeśli w pobliżu gracza
+        if (System.Math.Abs(player.transform.position.x - transform.position.x) < 13 && player.transform.position.x < 20) //jeśli w pobliżu gracza + gracz poza safeZonem
         {
             if (System.Math.Abs(player.transform.position.x - transform.position.x) < 2 || lockedInActivity) //jeśli bardzo blisko
             {
@@ -174,8 +174,6 @@ public class TankDestruction : MonoBehaviour {
     {
         
         if (coll.collider.tag == "heliBullet") {
-            //-99.5 lewy koniec
-            //-20 prawy koniec
             respDeresp();
         }
     }

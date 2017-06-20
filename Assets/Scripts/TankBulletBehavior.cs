@@ -14,7 +14,6 @@ public class TankBulletBehavior : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        Debug.Log(coll.collider.name);
         Quaternion zero = new Quaternion();
         zero.eulerAngles = new Vector3(0, 0, 0);
         Transform explosion = Instantiate(ExplosionPrefab, transform.position, zero) as Transform;
