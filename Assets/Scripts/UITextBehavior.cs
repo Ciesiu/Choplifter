@@ -5,32 +5,38 @@ using System.Collections;
 public class UITextBehavior : MonoBehaviour {
 
     public Text text;
-    private int ROUND_REMEMBERED;
-    private float timeLeft;
+    private static float timeLeft;
     // Use this for initialization
     void Start()
     {
         text = GetComponent<Text>();
         text.material.mainTexture.filterMode = FilterMode.Point;
-        ROUND_REMEMBERED = 0;
         timeLeft = 3;
     }
 
+    public static void ResetTime()
+    {
+        timeLeft = 3F;
+    }
     public void UpdateUI()
     {
         
-        if ((ROUND_REMEMBERED == 0) && (gameHolder.ROUND_NUMBER == 1)) { text.text = "FIRST SORTIE"; ROUND_REMEMBERED = 1; timeLeft = 3; }
-        if ((ROUND_REMEMBERED == 1) && (gameHolder.ROUND_NUMBER == 2)) { text.text = "SECOND SORTIE"; ROUND_REMEMBERED = 2; timeLeft = 3; }
-        if ((ROUND_REMEMBERED == 2) && (gameHolder.ROUND_NUMBER == 3)) { text.text = "THIRD SORTIE"; ROUND_REMEMBERED = 3; timeLeft = 3; }
-        if ((ROUND_REMEMBERED == 3) && (gameHolder.ROUND_NUMBER == 4)) { text.text = "GAME OVER"; ROUND_REMEMBERED = 0; timeLeft = 3; }
+        if (gameHolder.ROUND_NUMBER == 1) { text.text = "FIRST SORTIE"; }
+        if (gameHolder.ROUND_NUMBER == 2) { text.text = "SECOND SORTIE"; }
+        if (gameHolder.ROUND_NUMBER == 3) { text.text = "THIRD SORTIE"; }
+        if (gameHolder.ROUND_NUMBER == 4) { text.text = "GAME OVER"; }
+        if (gameHolder.ROUND_NUMBER == 5) { text.text = "GAME OVER"; }
     }
 
     // Update is called once per frame
     void Update()
     {
         timeLeft -= Time.deltaTime;
-        UpdateUI();
-        if (timeLeft < 0)
+        if(timeLeft>0)
+        {
+            UpdateUI();
+        }
+        else if (timeLeft =< 0)
         {
             text.text = "";
         }

@@ -19,6 +19,7 @@ public class Controls : MonoBehaviour {
     public int shootingDirection = 2;
     public bool flyingDisabled = false;
     public bool decelerate = false;
+    public bool isDead = false;
     private System.Random rnd = new System.Random();
     //1 - left-top; 2 - left-flat; 3 - left-bottom; 
     //4 - front-left; 5 - front-middle; 6 - front-right; 
@@ -68,12 +69,14 @@ public class Controls : MonoBehaviour {
         }
         if(coll.gameObject.tag == "jetMissile")
         {
-            toHeliResp = 120;
+            if (!isDead) { toHeliResp = 120; isDead = true; }
+
             //ded
         }
         if(coll.gameObject.tag == "tankBullet" && flyingDisabled)
         {
-            toHeliResp = 120;
+
+            if (!isDead) { toHeliResp = 120; isDead = true; }
             //also ded
         }
     }
@@ -93,6 +96,8 @@ public class Controls : MonoBehaviour {
 
         Transform tank0 = Instantiate(tank, tank1pos, zero) as Transform;
         //koniec respienia tanka
+        gameHolder.NewGame();
+        UITextBehavior.ResetTime();
     }
 	
 	// Update is called once per frame
@@ -204,10 +209,14 @@ public class Controls : MonoBehaviour {
         if (toHeliResp == 0)
         {
             transform.position = startingPosition;
+            flyingDisabled = true;
             
             gameHolder.HeliCrashed();
+            UITextBehavior.ResetTime();
             animator.SetInteger("Direction", 3);
+            isDead = false;
             toHeliResp = -1;
+
         }
     }
     
