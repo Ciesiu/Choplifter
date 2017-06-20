@@ -6,6 +6,7 @@ public class Controls : MonoBehaviour {
     public Camera cam;
     public Rigidbody2D rb;
     public Animator animator;
+    public GameObject explosion;
     public float movespeed;
     public bool moveleft;
     public bool moveright;
@@ -15,6 +16,7 @@ public class Controls : MonoBehaviour {
     public int shootingDirection = 2;
     public bool flyingDisabled = false;
     public bool decelerate = false;
+    private System.Random rnd = new System.Random();
     //1 - left-top; 2 - left-flat; 3 - left-bottom; 
     //4 - front-left; 5 - front-middle; 6 - front-right; 
     //7 - right-top; 8 - right-flat; 9 - right-bottom
@@ -31,6 +33,7 @@ public class Controls : MonoBehaviour {
     public float jetTimer;
     public int activeSurvs = 0;
 
+    private int toHeliResp = -1;
     
   
     void OnTriggerStay2D(Collider2D other)
@@ -62,15 +65,12 @@ public class Controls : MonoBehaviour {
         }
         if(coll.gameObject.tag == "jetMissile")
         {
-            transform.position = startingPosition;
-            //animacja śmierci
-            gameHolder.HeliCrashed();
-            animator.SetInteger("Direction", 3);
+            toHeliResp = 120;
             //ded
         }
         if(coll.gameObject.tag == "tankBullet" && flyingDisabled)
         {
-
+            toHeliResp = 120;
             //also ded
         }
     }
@@ -183,7 +183,30 @@ public class Controls : MonoBehaviour {
             }
         }
         //koniec dżetów
-        
+
+
+        toHeliResp--;
+        if (toHeliResp > 0)
+        { //animacja śmierci
+            rb.velocity = new Vector2(rb.velocity.x, -movespeed);
+            if(toHeliResp % 20 == 0)
+            {
+                //eksplozja
+                float expX = transform.position.x - 1f + ((float)rnd.Next(0, 20) / 10);
+                Quaternion zero = new Quaternion();
+                zero.eulerAngles = new Vector3(0, 0, 0);
+                Instantiate(explosion, new Vector3(expX, transform.position.y, transform.position.z), zero);
+            }
+
+        }
+        if (toHeliResp == 0)
+        {
+            transform.position = startingPosition;
+            
+            gameHolder.HeliCrashed();
+            animator.SetInteger("Direction", 3);
+            toHeliResp = -1;
+        }
     }
     
    

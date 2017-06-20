@@ -5,8 +5,9 @@ public class TankDestruction : MonoBehaviour {
 
     private Controls player;
     public GameObject tank;
+    public GameObject tankBullet;
     private Vector3 movePerFrame;
-    private Animator animator;
+    public Animator animator;
 
     private float activityTimer = 0;
     private float shootCooldown = 0;
@@ -74,6 +75,10 @@ public class TankDestruction : MonoBehaviour {
                         break;
                     default:
                         //szczał
+                        Quaternion zero = new Quaternion();
+                        zero.eulerAngles = new Vector3(0, 0, 0);
+                        Transform burningHouse = Instantiate(tankBullet, transform.position, zero) as Transform;
+                        Physics2D.IgnoreLayerCollision(15, 16);
                         shootCooldown = 0.2f;
                         break;
                 }
@@ -108,7 +113,7 @@ public class TankDestruction : MonoBehaviour {
         shootCooldown -= Time.deltaTime;
         //ustawianie lufy
         positionRelativeToPlayer = player.transform.position.x - transform.position.x;
-        if(positionRelativeToPlayer >= 5) //lufa daleko w prawo
+        if(positionRelativeToPlayer >= 3.5) //lufa daleko w prawo
         {
             animator.SetInteger("BarrelPosition", 2);
         }else if(positionRelativeToPlayer >= 2) //lufa lekko w prawo
@@ -119,7 +124,7 @@ public class TankDestruction : MonoBehaviour {
         {
             animator.SetInteger("BarrelPosition", 0);
         }
-        else if(positionRelativeToPlayer >= -5) //lufa lekko w lewo
+        else if(positionRelativeToPlayer >= -3.5) //lufa lekko w lewo
         {
             animator.SetInteger("BarrelPosition", -1);
         }

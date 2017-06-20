@@ -15,6 +15,7 @@ public class MissleBehavior : MonoBehaviour {
         Transform explosion = Instantiate(ExplosionPrefab, transform.position, zero) as Transform;
         Destroy(gameObject);
     }
+    
 
 	// Use this for initialization
 	void Start () {

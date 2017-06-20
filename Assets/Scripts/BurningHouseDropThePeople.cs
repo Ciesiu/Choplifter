@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BurgingHouseDropThePeople : MonoBehaviour {
+public class BurningHouseDropThePeople : MonoBehaviour {
 
     int survs;
     private Controls player;
