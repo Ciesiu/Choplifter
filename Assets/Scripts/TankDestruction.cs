@@ -39,7 +39,7 @@ public class TankDestruction : MonoBehaviour {
         }
 
         if (activityTimer <= 0) lockedInActivity = false;
-        if (System.Math.Abs(player.transform.position.x - transform.position.x) < 13 && player.transform.position.x < 20) //jeśli w pobliżu gracza + gracz poza safeZonem
+        if (System.Math.Abs(player.transform.position.x - transform.position.x) < 13 && player.transform.position.x < -20 ) //jeśli w pobliżu gracza + gracz poza safeZonem 
         {
             if (System.Math.Abs(player.transform.position.x - transform.position.x) < 2 || lockedInActivity) //jeśli bardzo blisko
             {
@@ -57,9 +57,13 @@ public class TankDestruction : MonoBehaviour {
                     {
                         currentActivity = rnd.Next(1, 3);
                     }
+                    if(transform.position.x >= -30) //jest za blisko
+                    {
+                        //nie może jechać w prawo
+                        if (currentActivity == 2) currentActivity = 1;
+                    }
                     if (currentActivity < 3) //jeśli ruch
                     {
-                        //activityTimer = (rnd.Next(5, 8)) / 10; //losuj długość ruchu
                         activityTimer = 1.0f;
                     }
                     lockedInActivity = true;
@@ -71,7 +75,10 @@ public class TankDestruction : MonoBehaviour {
                         transform.position -= movePerFrame;
                         break;
                     case 2:
-                        transform.position += movePerFrame;
+                        if (transform.position.x <= -30)//jeśli nie jest za blisko safeZonu
+                        {
+                            transform.position += movePerFrame;
+                        }
                         break;
                     default:
                         //szczał
@@ -96,8 +103,11 @@ public class TankDestruction : MonoBehaviour {
                         //jedź w strone gracza
                         if (player.transform.position.x > transform.position.x)//gracz jest po prawej
                         {
-                            //jazda w prawo
-                            transform.position += movePerFrame;
+                            if (transform.position.x <= -30) //jeśli nie jest za blisko safeZona
+                            {
+                                //jazda w prawo
+                                transform.position += movePerFrame;
+                            }
                         }
                         else //gracz jest po lewej
                         {
@@ -116,11 +126,11 @@ public class TankDestruction : MonoBehaviour {
         if(positionRelativeToPlayer >= 3.5) //lufa daleko w prawo
         {
             animator.SetInteger("BarrelPosition", 2);
-        }else if(positionRelativeToPlayer >= 2) //lufa lekko w prawo
+        }else if(positionRelativeToPlayer >= 1.5) //lufa lekko w prawo
         {
             animator.SetInteger("BarrelPosition", 1);
         }
-        else if(positionRelativeToPlayer >= -2) //lufa do góry
+        else if(positionRelativeToPlayer >= -1.5) //lufa do góry
         {
             animator.SetInteger("BarrelPosition", 0);
         }

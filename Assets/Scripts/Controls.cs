@@ -33,6 +33,15 @@ public class Controls : MonoBehaviour {
     public GameObject jet;
     public GameObject survToBase;
 
+    public GameObject fence1;
+    public GameObject fence2;
+    public GameObject fence3;
+    public GameObject fence4;
+
+    public GameObject mountaint1;
+    public GameObject mountaint2;
+    public GameObject mountaint3;
+
     //AktywneObiekty
     public float jetTimer;
     public int activeSurvs = 0;
@@ -83,7 +92,15 @@ public class Controls : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //cam = this.GetComponentInChildren<Camera>();
+        fence1 = GameObject.Find("env_fence");
+        fence2 = GameObject.Find("env_fence (1)");
+        fence3 = GameObject.Find("env_fence (2)");
+        fence4 = GameObject.Find("env_fence (3)");
+
+        mountaint1 = GameObject.Find("env_mountain");
+        mountaint2 = GameObject.Find("env_mountain (1)");
+        mountaint3 = GameObject.Find("env_mountain (2)");
+
         cam = Camera.main;
         rb = GetComponent<Rigidbody2D>();
         animator = this.GetComponent<Animator>();
@@ -218,7 +235,29 @@ public class Controls : MonoBehaviour {
             toHeliResp = -1;
 
         }
+
+        //update płotu
+        float camDrift = -20 - cam.transform.position.x;
+        //*1
+        //*1.1
+        //*1.5
+        //*2.1
+        fence1.transform.localPosition = new Vector3(camDrift, -2.26f, fence1.transform.localPosition.z);
+        fence2.transform.localPosition = new Vector3(camDrift * 1.1f, -2.39f, fence2.transform.localPosition.z);
+        fence3.transform.localPosition = new Vector3(camDrift * 1.5f, -2.66f, fence3.transform.localPosition.z);
+        fence4.transform.localPosition = new Vector3(camDrift * 2.1f, -3.12f, fence4.transform.localPosition.z);
+
+        //koniec updatu płotu
+        //update gór
+        //-2.169f wysokość osadzenia gór
+        float camDrift1 = 11 - cam.transform.position.x;
+        float camDrift2 = -14 - cam.transform.position.x;
+        float camDrift3 = -32 - cam.transform.position.x;
+
+        mountaint1.transform.localPosition = new Vector3(camDrift1 * 0.5f, -2.169f, mountaint1.transform.localPosition.z);
+        mountaint2.transform.localPosition = new Vector3(camDrift2 * 0.5f, -2.169f, mountaint2.transform.localPosition.z);
+        mountaint3.transform.localPosition = new Vector3(camDrift3 * 0.5f, -2.169f, mountaint3.transform.localPosition.z);
     }
-    
-   
+
+
 }
