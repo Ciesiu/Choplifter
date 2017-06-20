@@ -36,7 +36,7 @@ public class UITextBehavior : MonoBehaviour {
         {
             UpdateUI();
         }
-        else if (timeLeft =< 0)
+        else if (timeLeft <= 0)
         {
             text.text = "";
         }
