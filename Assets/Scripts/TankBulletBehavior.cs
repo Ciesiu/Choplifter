@@ -31,31 +31,38 @@ public class TankBulletBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Vector3 pos = transform.position;
         if (firstFrame)
         {
             //set pattern
             direction = tank.animator.GetInteger("BarrelPosition");
+            
             switch (direction)
             {
                 case -2:
+                    pos = new Vector3(transform.position.x,transform.position.y+0.5F, transform.position.z);
                     rotation.eulerAngles = new Vector3(0, 0, 60);
                     break;
                 case -1:
                     rotation.eulerAngles = new Vector3(0, 0, 45);
+                    pos = new Vector3(transform.position.x, transform.position.y + 0.5F, transform.position.z);
                     break;
                 case 0:
                     rotation.eulerAngles = new Vector3(0, 0, 0);
+                    pos = new Vector3(transform.position.x, transform.position.y + 0.5F, transform.position.z);
                     break;
                 case 1:
                     rotation.eulerAngles = new Vector3(0, 0, -45);
+                    pos = new Vector3(transform.position.x, transform.position.y + 0.5F, transform.position.z);
                     break;
                 case 2:
                     rotation.eulerAngles = new Vector3(0, 0, -60);
+                    pos = new Vector3(transform.position.x, transform.position.y + 0.5F, transform.position.z);
                     break;
             }
             firstFrame = false;
         }
-        Vector3 pos = transform.position;
+       
         Vector3 velocity = new Vector3(0,bulletSpeed * Time.deltaTime , 0);
         Vector3 rot = rotation.eulerAngles;
         
