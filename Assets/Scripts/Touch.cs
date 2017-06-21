@@ -6,7 +6,7 @@ public class Touch : MonoBehaviour {
     private Controls player;
 
     public GameObject heliBulletPrefab;
-    public float fireDelay = 0.25f;
+    public float fireDelay = 0.15f;
     float cooldownTimer = 0;
     
 
@@ -80,7 +80,7 @@ public class Touch : MonoBehaviour {
         player.animator.SetInteger("HorizontalMovement", 0);
         player.animator.SetFloat("Acceleration", -1);
         player.animator.SetBool("Mirror", true);
-        player.movespeed = 10;
+        player.movespeed = 5;
         setShootingDirection();
     }
     public void ReleaseRightArrow()
@@ -89,7 +89,7 @@ public class Touch : MonoBehaviour {
         player.animator.SetInteger("HorizontalMovement", 0);
         player.animator.SetFloat("Acceleration", -1);
         player.animator.SetBool("Mirror", true);
-        player.movespeed = 10;
+        player.movespeed = 5;
         setShootingDirection();
     }
     public void ReleaseTopArrow()

@@ -4,7 +4,7 @@ using System.Collections;
 public class HeliBulletMove : MonoBehaviour {
 
     private Controls player;
-    float bulletSpeed = 15;
+    float bulletSpeed = 32;
     Quaternion rotation;
 
 	// Use this for initialization
@@ -13,31 +13,34 @@ public class HeliBulletMove : MonoBehaviour {
         switch (player.shootingDirection)
         {
             case 1:
-                rotation.eulerAngles = new Vector3(0, 0, -30);
+                rotation.eulerAngles = new Vector3(0, 0, -20);
                 break;
             case 2:
                 rotation.eulerAngles = new Vector3(0, 0, 0);
                 break;
             case 3:
-                rotation.eulerAngles = new Vector3(0, 0, 30);
+                rotation.eulerAngles = new Vector3(0, 0, 20);
                 break;
             case 4:
                 rotation.eulerAngles = new Vector3(0, 0, 60);
+                bulletSpeed = 10;
                 break;
             case 5:
                 rotation.eulerAngles = new Vector3(0, 0, 90);
+                bulletSpeed = 10;
                 break;
             case 6:
                 rotation.eulerAngles = new Vector3(0, 0, 120);
+                bulletSpeed = 10;
                 break;
             case 7:
-                rotation.eulerAngles = new Vector3(0, 0, 210);
+                rotation.eulerAngles = new Vector3(0, 0, 200);
                 break;
             case 8:
                 rotation.eulerAngles = new Vector3(0, 0, 180);
                 break;
             case 9:
-                rotation.eulerAngles = new Vector3(0, 0, 150);
+                rotation.eulerAngles = new Vector3(0, 0, 160);
                 break;
         }
 

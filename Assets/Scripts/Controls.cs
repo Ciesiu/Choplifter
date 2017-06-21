@@ -149,12 +149,12 @@ public class Controls : MonoBehaviour {
         if (moveright)
         {
             rb.velocity = new Vector2(movespeed, rb.velocity.y);
-            if (movespeed < 25) movespeed+=0.5f;
+            if (movespeed < 15) movespeed+=0.5f;
         }
         if (moveleft)
         {
             rb.velocity = new Vector2(-movespeed, rb.velocity.y);
-            if (movespeed < 25) movespeed+=0.5f;
+            if (movespeed < 15) movespeed+=0.5f;
         }
         if (moveup)
         {
@@ -167,15 +167,15 @@ public class Controls : MonoBehaviour {
         }
 
 
-        if (movespeed >= 15)
+        if (movespeed > 5)
         {
             if (moveleft)
             {
-                cam.transform.localPosition = new Vector3(-4 * ((movespeed - 15) / 10), 0, -10);
+                cam.transform.localPosition = new Vector3(-4 * ((movespeed - 5) / 10), 0, -10);
             }
             if (moveright)
             {
-                cam.transform.localPosition = new Vector3(4 * ((movespeed - 15) / 10), 0, -10);
+                cam.transform.localPosition = new Vector3(4 * ((movespeed - 5) / 10), 0, -10);
             }
         }
         else
@@ -211,7 +211,7 @@ public class Controls : MonoBehaviour {
         jetTimer -= Time.deltaTime;
         if(gameHolder.SURV_SAVED > 8)
         {
-            if (jetTimer <= 0 && transform.position.x < 20) //jeśli czas na jeta + gracz jest poza safeZonem
+            if (jetTimer <= 0 && transform.position.x < -30) //jeśli czas na jeta + gracz jest poza safeZonem
             {
                 //resp atak dżeta
                 Quaternion zero = new Quaternion();
@@ -257,6 +257,8 @@ public class Controls : MonoBehaviour {
 
             if (gameHolder.ROUND_NUMBER < 4)
             {
+                
+                activeSurvs -= gameHolder.SURV_ONBOARD;
                 gameHolder.HeliCrashed();
                 UITextBehavior.ResetTime();
             }
