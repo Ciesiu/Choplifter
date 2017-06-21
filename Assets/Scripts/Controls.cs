@@ -70,11 +70,7 @@ public class Controls : MonoBehaviour {
                     gameHolder.SURV_ONBOARD--;
                     survUnloadTimer = 0.3f;
                     activeSurvs--;
-                    if (gameHolder.SURV_DIED + gameHolder.SURV_SAVED >= 64)
-                    {
-                        gameHolder.ROUND_NUMBER = 5;
-                        UITextBehavior.ResetTime();
-                    }
+
                 }
             }
         }
@@ -145,6 +141,11 @@ public class Controls : MonoBehaviour {
             audio.volume = 1F;
         }
 
+        if((gameHolder.ROUND_NUMBER!=5)&&(gameHolder.SURV_DIED + gameHolder.SURV_SAVED >= 64))
+        {
+            gameHolder.ROUND_NUMBER = 5;
+            UITextBehavior.ResetTime();
+        }
 
         if (moveright)
         {

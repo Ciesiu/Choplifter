@@ -25,7 +25,7 @@ public class UITextBehavior : MonoBehaviour {
         if (gameHolder.ROUND_NUMBER == 2) { text.text = "SECOND SORTIE"; }
         if (gameHolder.ROUND_NUMBER == 3) { text.text = "THIRD SORTIE"; }
         if (gameHolder.ROUND_NUMBER == 4) { text.text = "THE END"; }
-        if (gameHolder.ROUND_NUMBER == 5) { text.text = "MAGNIFICIENT SCORE: "+gameHolder.SURV_SAVED*10+""; }
+        if (gameHolder.ROUND_NUMBER == 5) { text.text = "MAGNIFICIENT"; }
     }
 
     // Update is called once per frame
