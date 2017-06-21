@@ -39,6 +39,7 @@ public class UITextBehavior : MonoBehaviour {
         else if (timeLeft <= 0)
         {
             text.text = "";
+            if (gameHolder.ROUND_NUMBER == 5) Application.LoadLevel(0);
         }
     }
 }
